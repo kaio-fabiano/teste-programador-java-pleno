@@ -3,9 +3,7 @@ package kaio.test.crud.demand_product;
 import kaio.test.crud.demand.Demand;
 import kaio.test.crud.demand_product.dto.DemandProductDto;
 import kaio.test.crud.product.Product;
-import kaio.test.crud.product.dto.ProductDto;
 import kaio.test.crud.shared.http.ResponseMessage;
-import org.jboss.logging.annotations.Param;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -14,7 +12,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/demand/{id}/products")
-public class DemandProductHandle {
+public class DemandProductResource {
     @Inject
     private DemandProductService demandProductService;
 

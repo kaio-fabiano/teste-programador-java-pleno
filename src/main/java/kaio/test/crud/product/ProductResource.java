@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/products")
-public class ProductHandle {
+public class ProductResource {
     @Inject
     private ProductMapper productMapper;
 
