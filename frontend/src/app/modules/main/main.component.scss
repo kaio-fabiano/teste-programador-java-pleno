@@ -1,0 +1,20 @@
+.btn {
+  margin: 1% 2rem;
+}
+
+.container-sm {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  .table {
+    display: table;
+    
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+}
