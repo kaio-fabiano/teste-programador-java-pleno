@@ -1,0 +1,106 @@
+<div class="container-sm">
+  <form
+    [formGroup]="clientForm"
+    class="form-group"
+    (ngSubmit)="submit()"
+    novalidate
+  >
+    <div>
+      <mat-label for="name">Nome: </mat-label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+        required
+      />
+      <mat-error
+        *ngIf="
+          clientForm.controls['name'].invalid &&
+          (clientForm.controls['name'].dirty ||
+            clientForm.controls['name'].touched)
+        "
+        class="alert"
+      >
+        <div *ngIf="clientForm.controls['name'].errors?.['required']">
+          Name is required.
+        </div>
+        <div *ngIf="clientForm.controls['name'].errors?.['minlength']">
+          O nome deve possuir mais de 3 caracteres.
+        </div>
+      </mat-error>
+    </div>
+
+    <div>
+      <label for="mail">E-mail: </label>
+      <input
+        type="mail"
+        class="form-control"
+        id="mail"
+        formControlName="mail"
+        required
+      />
+      <mat-error
+        *ngIf="
+          clientForm.controls['mail'].invalid &&
+          (clientForm.controls['mail'].dirty ||
+            clientForm.controls['mail'].touched)
+        "
+        class="alert"
+      >
+        <div *ngIf="clientForm.controls['mail'].errors">
+          Insira um Email Válido
+        </div>
+      </mat-error>
+    </div>
+
+    <div>
+      <label for="cpf">CPF: </label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="cpf"
+        [dropSpecialCharacters]="false"
+        mask="000.000.000-00"
+        required
+      />
+    </div>
+    <mat-error
+      *ngIf="
+        clientForm.controls['cpf'].invalid && clientForm.controls['cpf'].touched
+      "
+      class="alert"
+    >
+      <div *ngIf="clientForm.controls['cpf'].errors">Insira um CPF válido</div>
+    </mat-error>
+    <div>
+      <label for="phone">Telefone: </label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="phone"
+        [dropSpecialCharacters]="false"
+        mask="(00) 00000-0000"
+        required
+      />
+      <mat-error
+        *ngIf="
+          clientForm.controls['phone'].invalid &&
+          (clientForm.controls['phone'].dirty ||
+            clientForm.controls['phone'].touched)
+        "
+        class="alert"
+      >
+        <div *ngIf="clientForm.controls['phone'].errors">
+          Insira um Telefone válido
+        </div>
+      </mat-error>
+    </div>
+    <br />
+    <div>
+      <button class="btn btn-primary" [disabled]="!clientForm.valid">
+        Enviar dados
+      </button>
+    </div>
+  </form>
+</div>
