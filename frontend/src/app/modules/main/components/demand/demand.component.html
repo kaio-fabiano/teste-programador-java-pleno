@@ -1,0 +1,64 @@
+<ng-container>
+  <div class="container-sm">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Id do Cliente</th>
+          <th scope="col">Data</th>
+          <th scope="col">Total</th>
+          <th scope="col">Opções</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let demand of demands!">
+          <td>{{ demand.id }}</td>
+          <td>{{ demand.description }}</td>
+          <td>{{ demand.client_id }}</td>
+          <td>{{ demand.data | date: "dd/MM/yyyy" }}</td>
+          <td>{{ demand.total }}</td>
+          <td>
+            <div ngbDropdown class="d-inline-block">
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+              >
+                Opções
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem (click)="updateDemand(demand.id!)">
+                  Update
+                </button>
+                <button ngbDropdownItem (click)="deleteDemand(demand.id!)">
+                  Delete
+                </button>
+                <button ngbDropdownItem (click)="addItens(demand.id!)">
+                  Adicionar produtos
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <div class="text-right">
+        <button
+          class="btn btn-primary"
+          (click)="pagenate(-1)"
+          [disabled]="init"
+        >
+          -
+        </button>
+        <label for="">< {{ pag }} ></label>
+        <button class="btn btn-primary" (click)="pagenate(+1)" [disabled]="max">
+          +
+        </button>
+      </div>
+    </table>
+    <button type="button" class="btn btn-primary" (click)="goToProducts()">
+      Ir para Clientes
+    </button>
+  </div>
+</ng-container>
