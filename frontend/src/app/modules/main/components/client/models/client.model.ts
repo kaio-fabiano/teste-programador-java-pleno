@@ -1,8 +1,7 @@
-
-
 export class Client {
-    name?: string;
-    cpf?: string;
-    phone?: string;
-    mail?: string;     
+  id?: number;
+  name?: string;
+  cpf?: string;
+  phone?: string;
+  mail?: string;
 }
