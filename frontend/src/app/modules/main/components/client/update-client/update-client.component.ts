@@ -22,7 +22,7 @@ export class UpdateClientComponent implements OnInit {
     private clientService: ClientService,
     private fb: FormBuilder,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -42,7 +42,6 @@ export class UpdateClientComponent implements OnInit {
       const clients = await this.clientService.listClients();
       let index = clients.findIndex((search) => search.id == id);
       this.client = clients[index];
-      console.log(this.client);
     } catch (error) {
       const data = error as AxiosError;
       Swal.fire({
@@ -91,24 +90,29 @@ export class UpdateClientComponent implements OnInit {
 
   private initForm(): void {
     this.clientForm = this.fb.group({
-      name: ["", Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(100)
-      ])],
-      cpf: ["", Validators.compose([Validators.required, ValidateCpf])],
-      mail: ["", Validators.compose([Validators.email])],
-      phone: ["", Validators.compose([Validators.minLength(15)])],
+      name: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100),
+        ]),
+      ],
+      cpf: ['', Validators.compose([Validators.required, ValidateCpf])],
+      mail: ['', Validators.compose([Validators.email])],
+      phone: ['', Validators.compose([Validators.minLength(15)])],
     });
   }
 
   public setValueForm(client: Client): void {
     this.clientForm = this.fb.group({
-      name: [client.name, Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(100),
-      ]),
+      name: [
+        client.name,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100),
+        ]),
       ],
       cpf: [client.cpf, Validators.compose([Validators.required, ValidateCpf])],
       mail: [client.mail, Validators.compose([Validators.email])],
