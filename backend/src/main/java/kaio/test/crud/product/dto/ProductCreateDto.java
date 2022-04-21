@@ -14,7 +14,7 @@ public class ProductCreateDto extends ProductDto {
     @NotBlank
     private String description;
     @NotNull
-    private int unities;
+    private Integer unities;
     @NotNull
-    private double price;
+    private Double price;
 }

@@ -2,9 +2,6 @@ package kaio.test.crud.product.dto;
 
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -12,6 +9,6 @@ import javax.validation.constraints.NotNull;
 @ToString
 public class ProductDto {
     private String description;
-    private int unities;
-    private double price;
+    private Integer unities;
+    private Double price;
 }
