@@ -9,12 +9,16 @@ import { ProductService } from '../product.service';
 @Component({
   selector: 'app-create-product',
   templateUrl: './create-product.component.html',
-  styleUrls: ['./create-product.component.scss']
+  styleUrls: ['./create-product.component.scss'],
 })
 export class CreateProductComponent implements OnInit {
   productForm!: FormGroup;
 
-  constructor(private productService: ProductService, private fb: FormBuilder, private router: Router) { }
+  constructor(
+    private productService: ProductService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -40,10 +44,9 @@ export class CreateProductComponent implements OnInit {
       return null;
     }
   }
-  
-  backToProducts(){
-    this.router.navigateByUrl("products");
-    
+
+  backToProducts() {
+    this.router.navigateByUrl('products');
   }
 
   submit(): void {
