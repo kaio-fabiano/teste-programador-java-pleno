@@ -14,7 +14,7 @@ export class DemandService {
   private path: string = "/demands/";
   private apiUrl: string = environment.urlToApi;
 
-  public async listDemand() {
+  public async listDemands() {
     const { data } = await axios.get<Demand[]>(this.apiUrl + this.path);
     return data;
   }

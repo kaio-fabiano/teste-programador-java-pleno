@@ -36,7 +36,7 @@ export class DemandComponent implements OnInit {
   }
 
   public async listDemands() {
-    const demands = await this.demandService.listDemand();
+    const demands = await this.demandService.listDemands();
     return demands;
   }
 
