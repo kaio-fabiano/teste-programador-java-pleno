@@ -1,11 +1,11 @@
 package kaio.test.crud.demand;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import kaio.test.crud.product.Product;
 import kaio.test.crud.shared.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,6 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Table(name = "demand")
 public class Demand extends BaseEntity {
     public Demand(){
         this.date = new Date();
@@ -24,7 +25,7 @@ public class Demand extends BaseEntity {
     private Long client_id;
     private Date date;
     private String description;
-    @ManyToMany
+    @ManyToMany( cascade = CascadeType.ALL ) @Fetch(FetchMode.JOIN)
     @JoinTable(
             name = "demand_product",
             joinColumns = @JoinColumn(
@@ -45,10 +46,5 @@ public class Demand extends BaseEntity {
             }
         }
         return total;
-    }
-    public void merge(Demand subject){
-        this.setClient_id(subject.client_id);
-        this.setDescription(subject.description);
-        this.setProducts(subject.products);
     }
 }
