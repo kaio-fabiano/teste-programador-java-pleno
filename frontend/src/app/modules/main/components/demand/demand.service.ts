@@ -3,7 +3,8 @@ import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { CreateDemandDto } from './dto/create-demand.dto';
 import { UpdateDemandDto } from './dto/update-demand.dto';
-import { Demand } from './models/demand.model';
+import { Demand } from './model/demand.model';
+
 
 @Injectable({
   providedIn: 'root'

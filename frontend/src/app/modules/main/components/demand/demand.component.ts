@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AxiosError } from 'axios';
 import Swal from 'sweetalert2';
 import { DemandService } from './demand.service';
-import { Demand } from './models/demand.model';
+import { Demand } from './model/demand.model';
 
 @Component({
   selector: 'app-demand',

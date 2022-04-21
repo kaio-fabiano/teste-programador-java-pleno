@@ -16,7 +16,7 @@
           <td>{{ demand.id }}</td>
           <td>{{ demand.description }}</td>
           <td>{{ demand.client_id }}</td>
-          <td>{{ demand.data | date: "dd/MM/yyyy" }}</td>
+          <td>{{ demand.date | date: "dd/MM/yyyy" }}</td>
           <td>{{ demand.total }}</td>
           <td>
             <div ngbDropdown class="d-inline-block">
@@ -58,7 +58,7 @@
       </div>
     </table>
     <button type="button" class="btn btn-primary" (click)="goToProducts()">
-      Ir para Clientes
+      Ir para Produtos
     </button>
   </div>
 </ng-container>
