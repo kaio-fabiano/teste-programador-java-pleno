@@ -1,1 +1,66 @@
-<p>product works!</p>
+<ng-container>
+  <div class="container-sm">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Quatidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr scope="row" *ngFor="let product of products!">
+          <td scope="row">{{ product.id }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.preco }}</td>
+          <td>{{ product.unities }}</td>
+          <td>
+            <div ngbDropdown class="d-inline-block">
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+              >
+                Opções
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem (click)="updateProduct(product.id!)">
+                  Update
+                </button>
+                <button ngbDropdownItem (click)="deleteProduct(product.id!)">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <div class="text-right">
+        <button
+          class="btn btn-primary"
+          (click)="pagenate(-1)"
+          [disabled]="init"
+        >
+          -
+        </button>
+        <label for="">< {{ page }} ></label>
+        <button class="btn btn-primary" (click)="pagenate(+1)" [disabled]="max">
+          +
+        </button>
+      </div>
+    </table>
+    <div class="conainer">
+      <button type="button" class="btn btn-primary" (click)="createProduct()">
+        Cadastrar Cliente
+      </button>
+      <button type="button" class="btn btn-primary" (click)="goToClients()">
+        Consultar Produtos
+      </button>
+      <button type="button" class="btn btn-primary" (click)="goToDemands()">
+        Consultar Pedidos
+      </button>
+    </div>
+  </div>
+</ng-container>
