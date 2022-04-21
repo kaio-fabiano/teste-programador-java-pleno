@@ -24,11 +24,11 @@ export class ProductComponent implements OnInit {
   }
 
   public async createProduct() {
-    this.router.navigateByUrl('produtcs/create');
+    this.router.navigateByUrl('products/create');
   }
 
   public async updateProduct(id: number) {
-    this.router.navigateByUrl('produtcs/update/' + id);
+    this.router.navigateByUrl('products/update/' + id);
   }
 
   public async deleteProduct(id: number) {
