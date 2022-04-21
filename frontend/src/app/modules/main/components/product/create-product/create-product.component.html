@@ -1,0 +1,97 @@
+<div class="container-sm">
+    <form
+      [formGroup]="productForm"
+      class="form-group"
+      (ngSubmit)="submit()"
+      novalidate
+    >
+      <div>
+        <mat-label for="description">Descrição: </mat-label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          formControlName="description"
+          required
+        />
+        <mat-error
+          *ngIf="
+          productForm.controls['description'].invalid &&
+            (productForm.controls['description'].dirty ||
+            productForm.controls['description'].touched)
+          "
+          class="alert"
+        >
+          <div *ngIf="productForm.controls['description'].errors?.['required']">
+            Insira uma descrição válida
+          </div>
+          <div *ngIf="productForm.controls['description'].errors?.['minlength']">
+            A descrição deve possuir mais de 3 caracteres.
+          </div>
+        </mat-error>
+      </div>
+  
+      <div>
+        <label for="price">Preço: </label>
+        <input
+          type="number"
+          class="form-control"
+          id="price"
+          formControlName="price"
+          required
+        />
+        <mat-error
+          *ngIf="
+          productForm.controls['price'].invalid &&
+            (productForm.controls['price'].dirty ||
+            productForm.controls['price'].touched)
+          "
+          class="alert"
+        >
+          <div *ngIf="productForm.controls['price'].errors!['required']">
+            Insira um valor válido.
+          </div>
+          <div *ngIf="productForm.controls['price'].errors!['min']">
+            O valor deve ser maior que 0.
+          </div>
+        </mat-error>
+      </div>
+  
+      <div>
+        <label for="unities">Unidades: </label>
+        <input
+          type="number"
+          class="form-control"
+          id="unities"
+          formControlName="unities"
+          required
+        />
+        <mat-error
+          *ngIf="
+          productForm.controls['unities'].invalid &&
+            (productForm.controls['unities'].dirty ||
+            productForm.controls['unities'].touched)
+          "
+          class="alert"
+        >
+          <div *ngIf="productForm.controls['unities'].errors!['required']">
+            Insira um valor válido.
+          </div>
+          <div *ngIf="productForm.controls['unities'].errors!['min']">
+            O valor deve ser maior que 0.
+          </div>
+        </mat-error>
+      </div>
+       
+      <br />
+      <div class="container">
+        <button class="btn btn-primary" [disabled]="!productForm.valid">
+          Enviar dados
+        </button>
+        <button class="btn btn-primary" (click)="backToProducts()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+  
