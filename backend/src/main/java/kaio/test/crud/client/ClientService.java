@@ -1,7 +1,9 @@
 package kaio.test.crud.client;
 
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import kaio.test.crud.client.dto.ClientCreateDto;
 import kaio.test.crud.client.dto.ClientUpdateDto;
+import kaio.test.crud.demand.Demand;
 import kaio.test.crud.shared.http.ValidateErrors;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -10,7 +12,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-
 import java.util.List;
 import java.util.Set;
 
@@ -25,9 +26,17 @@ public class ClientService {
     @Inject
     private ValidateErrors errors;
 
-    public List<Client> listClients(){
-        List<Client> clients = Client.listAll();
-        return clients;
+    public List<Client> listClients(int page, int limit){
+        PanacheQuery<Client> clientsPages = Client.find("1=1").page(page, limit);
+        return clientsPages.list();
+    }
+
+    public List<Demand> listDemandsByClientId( Long id, int limit, int page) {
+        Client client = Client.findById(id);
+        if (client == null) {
+            throw  new NotFoundException("Client no Found");
+        }
+        return Demand.find("client_id",id).page(page,limit).list();
     }
 
     public Client createClient( ClientCreateDto clientDto ) {
@@ -61,7 +70,7 @@ public class ClientService {
             if (client == null){
                 throw new WebApplicationException("Client Not Found", 404);
             } else {
-                client.mergeCustom(clientMapper.toResource(clientDto));
+                client.merge(clientMapper.toResource(clientDto));
                 client.persistAndFlush();
                 return client;
             }
@@ -72,11 +81,7 @@ public class ClientService {
 
     public Response deleteClient(Long id) {
         try {
-            Client client = Client.findById(id);
-            if (client == null) {
-                throw new WebApplicationException("Client Not Found", 404);
-            }
-            client.delete();
+            Client.delete("id", id);
             return Response.status(200,"Delete Success").build();
         } catch (Exception error){
             throw error;

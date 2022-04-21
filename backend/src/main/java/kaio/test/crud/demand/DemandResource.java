@@ -1,7 +1,6 @@
 package kaio.test.crud.demand;
 
 import kaio.test.crud.demand.dto.DemandDto;
-import kaio.test.crud.product.Product;
 import kaio.test.crud.shared.http.ResponseMessage;
 
 import javax.inject.Inject;
@@ -21,8 +20,14 @@ public class DemandResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Product> index(){
-        return demandService.listDemands();
+    public List<Demand> index(@QueryParam("page") int page, @QueryParam("limit") int limit){
+        if (page == 0) {
+            page = 1;
+        }
+        if (limit == 0) {
+            limit = 10;
+        }
+        return demandService.listDemands(page - 1, limit);
     }
 
     @Transactional

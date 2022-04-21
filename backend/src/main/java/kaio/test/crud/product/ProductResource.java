@@ -24,8 +24,11 @@ public class ProductResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Product> index(){
-        return Product.listAll();
+    public List<Product> index(@QueryParam("limit") int limit,@QueryParam("page")  int page){
+        if (limit == 0){
+            return productService.listAllProducts();
+        }
+        return productService.listProducts(limit, page);
     }
 
     @POST
@@ -55,17 +58,16 @@ public class ProductResource {
     @Path("/{id}")
     public Response update( Long id, ProductDto productDto ){
         try {
-            Product product = Product.findById(id);
-            if (product == null){
-                throw new NotFoundException("Product Not Found");
-            } else {
-                product.merge(productMapper.toResource(productDto));
-                product.persist();
-                return Response.ok(product).build();
+            return Response.ok(productService.updateProduct(id, productDto)).build();
+        }
+        catch (WebApplicationException error){
+            if (error.getResponse().getStatus() == 422){
+                return responseMessage.responseMessage(422,error.getMessage());
             }
-        } catch (Exception err){
-            System.out.println(err);
-            throw new BadRequestException("Error While Update Client");
+            throw error;
+        }
+        catch (Exception error){
+            throw error;
         }
     }
 
@@ -74,15 +76,16 @@ public class ProductResource {
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {
         try {
-            Product product = Product.findById(id);
-            if (product == null) {
-                throw new WebApplicationException("Product with id " + id + " does not exist.", Response.Status.NOT_FOUND);
+            return productService.deleteProduct(id);
+        }
+        catch (WebApplicationException error) {
+            if (error.getResponse().getStatus() == 404) {
+                return responseMessage.responseMessage(404,error.getMessage());
             }
-            product.delete();
-            return Response.status(204,"Delete Sucess").build();
-        } catch (Exception err){
-            System.out.println(err);
-            throw new BadRequestException("Error While Update Product");
+            throw error;
+        }
+        catch (Exception err) {
+            throw err;
         }
     }
 }

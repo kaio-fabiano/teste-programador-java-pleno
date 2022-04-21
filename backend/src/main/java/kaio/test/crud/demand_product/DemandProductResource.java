@@ -11,7 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/demand/{id}/products")
+@Path("/demands/{id}/products")
 public class DemandProductResource {
     @Inject
     private DemandProductService demandProductService;
@@ -20,9 +20,11 @@ public class DemandProductResource {
     private ResponseMessage responseMessage;
 
     @GET
-    public List<Product> index(@PathParam("id") Long id){
-        Demand demand = Demand.findById(id);
-        return demand.getProducts();
+    public List<Product> index(@PathParam("id") Long id, @QueryParam("page") int page,@QueryParam("limit") int limit) {
+      if (limit == 0){
+          limit = 10;
+      }
+      return demandProductService.listDemandProducts(id, page, limit);
     }
 
     @POST

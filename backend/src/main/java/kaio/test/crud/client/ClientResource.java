@@ -2,6 +2,7 @@ package kaio.test.crud.client;
 
 import kaio.test.crud.client.dto.ClientCreateDto;
 import kaio.test.crud.client.dto.ClientUpdateDto;
+import kaio.test.crud.demand.Demand;
 import kaio.test.crud.shared.http.ResponseMessage;
 
 import javax.inject.Inject;
@@ -18,10 +19,23 @@ public class ClientResource {
     @Inject
     private ResponseMessage responseMessage;
 
+    @Path("/{id}/demands")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Client> index(){
-       return clientService.listClients();
+    public List<Demand> resolveDemands(@PathParam("id") Long id, @QueryParam("limit") int limit,@QueryParam("page") int page) {
+        if (limit == 0) {
+            limit = 10;
+        }
+        return clientService.listDemandsByClientId(id, limit, page - 1);
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Client> index(@QueryParam("limit") int limit,@QueryParam("page")  int page){
+        if (limit == 0) {
+            limit = 10;
+        }
+        return clientService.listClients(page, limit - 1);
     }
 
     @Transactional
