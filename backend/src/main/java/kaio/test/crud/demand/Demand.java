@@ -3,6 +3,7 @@ package kaio.test.crud.demand;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import kaio.test.crud.product.Product;
+import kaio.test.crud.shared.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Demand extends kaio.test.crud.shared.Entity {
+public class Demand extends BaseEntity {
     public Demand(){
         this.date = new Date();
     }

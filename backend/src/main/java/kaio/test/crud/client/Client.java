@@ -2,6 +2,7 @@ package kaio.test.crud.client;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import kaio.test.crud.demand.Demand;
+import kaio.test.crud.shared.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,7 +15,7 @@ import java.util.List;
 @Setter
 @Entity
 @ToString
-public class Client extends kaio.test.crud.shared.Entity {
+public class Client extends BaseEntity {
     @Id @GeneratedValue private Long id;
     private String name;
     private String cpf;

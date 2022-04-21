@@ -1,11 +1,6 @@
 package kaio.test.crud.product;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import kaio.test.crud.client.Client;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import kaio.test.crud.shared.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +11,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Product extends kaio.test.crud.shared.Entity {
+public class Product extends BaseEntity {
     @Id @GeneratedValue private Long id;
     private String description;
     private int unities;
