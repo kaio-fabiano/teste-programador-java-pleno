@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jboss.resteasy.reactive.DateFormat;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -18,6 +17,5 @@ public class DemandDto {
     @NotBlank
     private String description;
     @NotNull
-    @Min(value = 0L, message = "Client id Must be Positive")
     private Long client_id;
 }
