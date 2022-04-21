@@ -1,15 +1,16 @@
 package kaio.test.crud.demand;
 
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import kaio.test.crud.client.Client;
 import kaio.test.crud.demand.dto.DemandDto;
-import kaio.test.crud.product.Product;
 import kaio.test.crud.shared.http.ValidateErrors;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import javax.ws.rs.*;
+import javax.ws.rs.ClientErrorException;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Set;
@@ -25,8 +26,9 @@ public class DemandService {
     @Inject
     private ValidateErrors errors;
 
-    public List<Product> listDemands() {
-        return Demand.listAll();
+    public List<Demand> listDemands(int page, int limit){
+        PanacheQuery<Demand> productPages = Demand.find("1=1").page(page, limit);
+        return productPages.list();
     }
 
     public Demand createDemand(DemandDto demandDto) {
@@ -69,11 +71,7 @@ public class DemandService {
 
     public Response deleteDemand(Long id) {
         try {
-            Demand demand = Demand.findById(id);
-            if (demand == null) {
-                throw new WebApplicationException("Demand Not Found", 404);
-            }
-            demand.delete();
+            Demand.delete("id", id);
             return Response.status(200,"Delete Success").build();
         } catch (Exception err){
             throw err;

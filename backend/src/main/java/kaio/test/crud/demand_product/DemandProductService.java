@@ -1,19 +1,17 @@
 package kaio.test.crud.demand_product;
 
 import kaio.test.crud.demand.Demand;
-import kaio.test.crud.demand.dto.DemandDto;
 import kaio.test.crud.demand_product.dto.DemandProductDto;
 import kaio.test.crud.product.Product;
 import kaio.test.crud.shared.http.ValidateErrors;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.ws.rs.ClientErrorException;
-import javax.ws.rs.POST;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -27,9 +25,12 @@ public class DemandProductService {
     @Inject
     private ValidateErrors errors;
 
-    public List<Product> listDemandProducts(Long id){
+    public List<Product> listDemandProducts(Long id, int page, int limit){
         Demand demand = Demand.findById(id);
-        return demand.getProducts();
+        if (demand == null) {
+            throw new NotFoundException();
+        }
+        return Product.find("SELECT p FROM Product p INNER JOIN p.demands pd WHERE pd.id = ?1", demand.getId()).page(page, limit).list();
     }
 
     public List<Product> createDemandProducts(Long id, DemandProductDto demandProductDto){

@@ -1,4 +1,5 @@
 package kaio.test.crud.product;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import kaio.test.crud.product.dto.ProductCreateDto;
 import kaio.test.crud.product.dto.ProductDto;
 import kaio.test.crud.shared.http.ValidateErrors;
@@ -24,7 +25,12 @@ public class ProductService {
     @Inject
     private ValidateErrors errors;
 
-    public List<Product> listProducts(){
+    public List<Product> listProducts(int limit, int page){
+        PanacheQuery<Product> productPages = Product.find("1=1").page(page, limit);
+        return productPages.list();
+    }
+
+    public List<Product> listAllProducts(){
         return Product.listAll();
     }
 
