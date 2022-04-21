@@ -1,13 +1,7 @@
 package kaio.test.crud.client.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import kaio.test.crud.demand.Demand;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
-import java.util.List;
 
 public class ClientUpdateDto extends ClientDto{
 
