@@ -1,8 +1,8 @@
 CREATE TABLE demand(
     id int8 NOT NULL,
     client_id int8 NOT NULL,
-    date date NOT NULL,
+    date DATE NOT NULL,
     description text NOT NULL,
-    primary key (id),
-    foreign key (client_id) references client(id) on delete cascade
+    PRIMARY KEY (id),
+    FOREIGN KEY (client_id) REFERENCES client(id) ON DELETE CASCADE ON UPDATE CASCADE
 );

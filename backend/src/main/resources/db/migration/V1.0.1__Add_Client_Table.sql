@@ -1,8 +1,8 @@
 CREATE TABLE client(
     id int8 NOT NULL,
-    name varchar(100),
-    cpf varchar(20) UNIQUE,
-    phone varchar (20),
-    mail varchar (50) UNIQUE,
-    primary key (id)
+    name VARCHAR (100),
+    cpf VARCHAR (20) UNIQUE,
+    phone VARCHAR (20),
+    mail VARCHAR (50) UNIQUE,
+    PRIMARY KEY (id)
 );
