@@ -42,7 +42,6 @@ export class UpdateProductComponent implements OnInit {
       const products = await this.productService.listProducts();
       let index = products.findIndex((search) => search.id == id);
       this.product = products[index];
-      console.log(this.product);
     } catch (error) {
       const data = error as AxiosError;
       Swal.fire({

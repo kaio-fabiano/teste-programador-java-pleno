@@ -26,8 +26,6 @@ export class ClientService {
   }
 
   public async createClient(client: CreateClientDto) {
-    console.log(this.apiUrl + this.path, client);
-
     const { data } = await axios.post<Client>(this.apiUrl + this.path, client);
     return data;
   }
