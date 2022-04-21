@@ -20,7 +20,7 @@ export class ClientService {
 
   public async listPageClients(page: number, limit: number) {
     const { data } = await axios.get<Client[]>(
-      this.apiUrl + this.path + '?page=' + (page-1) + '&limit=' + limit
+      this.apiUrl + this.path + '?page=' + (page) + '&limit=' + limit
     );
     return data;
   }

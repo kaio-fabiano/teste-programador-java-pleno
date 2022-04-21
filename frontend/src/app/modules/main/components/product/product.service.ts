@@ -19,7 +19,7 @@ export class ProductService {
 
   public async listPageProducts(page: number, limit: number) {
     const { data } = await axios.get<Product[]>(
-      this.apiUrl + this.path + '?page=' + (page - 1) + '&limit=' + limit
+      this.apiUrl + this.path + '?page=' + (page) + '&limit=' + limit
     );
     return data;
   }

@@ -21,7 +21,7 @@ export class DemandService {
   
   public async listPageDemands(page: number, limit: number) {
     const { data } = await axios.get<Demand[]>(
-      this.apiUrl + this.path + '?page=' + (page-1) + '&limit=' + limit
+      this.apiUrl + this.path + '?page=' + (page) + '&limit=' + limit
     );
     return data;
   }
