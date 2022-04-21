@@ -1,4 +1,5 @@
 package kaio.test.crud.product;
+
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import kaio.test.crud.product.dto.ProductCreateDto;
 import kaio.test.crud.product.dto.ProductDto;
@@ -6,10 +7,9 @@ import kaio.test.crud.shared.http.ValidateErrors;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import javax.ws.rs.*;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Set;
@@ -50,7 +50,7 @@ public class ProductService {
         }
     }
 
-    public Response updateProduct(Long id, ProductDto productDto ){
+    public Product updateProduct(Long id, ProductDto productDto ){
         Set<ConstraintViolation<ProductDto>> violations = validator.validate(productDto);
         if (!violations.isEmpty()) {
             String message = errors.format(violations);
@@ -63,25 +63,19 @@ public class ProductService {
             } else {
                 product.merge(productMapper.toResource(productDto));
                 product.persist();
-                return Response.ok(product).build();
+                return product;
             }
         } catch (Exception error){
-
             throw error;
         }
     }
 
     public Response deleteProduct(Long id) {
         try {
-            Product product = Product.findById(id);
-            if (product == null) {
-                throw new WebApplicationException("Client Not Found", 404);
-            }
-            product.delete();
+            Product.delete("id", id);
             return Response.status(200,"Delete Success").build();
         } catch (Exception error){
-            System.out.println(error);
-            throw new BadRequestException("Error While Update Product");
+            throw error;
         }
     }
 }
