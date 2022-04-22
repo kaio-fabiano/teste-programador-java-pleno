@@ -21,7 +21,10 @@ public class DemandProductResource {
 
     @GET
     public List<Product> index(@PathParam("id") Long id, @QueryParam("page") int page,@QueryParam("limit") int limit) {
-      if (limit == 0){
+        if (page == 0){
+            page = 1;
+        }
+        if (limit == 0){
           limit = 10;
       }
       return demandProductService.listDemandProducts(id, page, limit);
