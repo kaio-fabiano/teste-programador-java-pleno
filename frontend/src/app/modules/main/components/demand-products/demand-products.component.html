@@ -1,0 +1,95 @@
+<ng-container>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Quatidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr scope="row" *ngFor="let demandProduct of demandProducts!">
+              <td scope="row">{{ demandProduct.id }}</td>
+              <td>{{ demandProduct.description }}</td>
+              <td>{{ demandProduct.price }}</td>
+              <td>{{ demandProduct.unities }}</td>
+              <td>
+                <div ngbDropdown class="d-inline-block">
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary"
+                    (click)="removeOfDemand(demandProduct)"
+                  >
+                    Remover
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <div class="text-right">
+            <button
+              class="btn btn-primary"
+              (click)="pagenate(-1)"
+              [disabled]="init"
+            >
+              -
+            </button>
+            <label for="">< {{ page }} ></label>
+            <button
+              class="btn btn-primary"
+              (click)="pagenate(+1)"
+              [disabled]="max"
+            >
+              +
+            </button>
+          </div>
+        </table>
+      </div>
+
+      <div class="col-md-6">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Quatidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr scope="row" *ngFor="let product of products!">
+              <td scope="row">{{ product.id }}</td>
+              <td>{{ product.description }}</td>
+              <td>{{ product.price }}</td>
+              <td>{{ product.unities }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary"
+                  (click)="addToDemand(product)"
+                >
+                  Adionar ao pedido
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <button type="button" class="btn btn-outline-primary" (click)="commit()">
+        Finalizar pedido
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        (click)="backToClients()"
+      >
+        Cancelar
+      </button>
+    </div>
+  </div>
+</ng-container>
