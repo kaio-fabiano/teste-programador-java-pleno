@@ -30,7 +30,7 @@ export class CreateProductComponent implements OnInit {
       Swal.fire({
         icon: 'success',
         title: 'Sucess',
-        text: 'Product criado com sucesso!',
+        text: 'Produto criado com sucesso!',
       });
       this.backToProducts();
       return newProduct;
