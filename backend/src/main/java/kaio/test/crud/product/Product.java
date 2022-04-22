@@ -1,7 +1,6 @@
 package kaio.test.crud.product;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import kaio.test.crud.demand.Demand;
 import kaio.test.crud.shared.BaseEntity;
 import lombok.*;
