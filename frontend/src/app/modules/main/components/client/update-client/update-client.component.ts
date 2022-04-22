@@ -1,6 +1,6 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AxiosError } from 'axios';
 import Swal from 'sweetalert2';
 import { ClientService } from '../client.service';
@@ -21,7 +21,8 @@ export class UpdateClientComponent implements OnInit {
   constructor(
     private clientService: ClientService,
     private fb: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -54,12 +55,13 @@ export class UpdateClientComponent implements OnInit {
 
   public async updateClient(client: UpdateClientDto, id: number) {
     try {
-      const newClient = await this.clientService.updateClient(id, client);
+      await this.clientService.updateClient(id, client);
       Swal.fire({
         icon: 'success',
         title: 'Sucess',
         text: 'Cliente atualizado com sucesso!',
       });
+      this.router.navigateByUrl('clients')
     } catch (error) {
       const data = error as AxiosError;
       Swal.fire({
