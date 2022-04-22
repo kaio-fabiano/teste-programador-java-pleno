@@ -1,5 +1,7 @@
 package kaio.test.crud.product;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import kaio.test.crud.demand.Demand;
 import kaio.test.crud.shared.BaseEntity;
 import lombok.*;
@@ -17,7 +19,7 @@ import java.util.List;
 @ToString
 @Table(name = "product")
 public class Product extends BaseEntity {
-    @ManyToMany( cascade = CascadeType.ALL ) @Fetch(FetchMode.JOIN)
+    @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER ) @Fetch(FetchMode.JOIN)
     @JoinTable(
             name = "demand_product",
             joinColumns = @JoinColumn(
@@ -29,6 +31,7 @@ public class Product extends BaseEntity {
                     referencedColumnName = "id"
             )
     )
+    @JsonBackReference
     private List<Demand> demands;
     @Id @GeneratedValue private Long id;
     private String description;

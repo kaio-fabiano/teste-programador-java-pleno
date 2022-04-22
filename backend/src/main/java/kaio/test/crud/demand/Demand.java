@@ -1,5 +1,6 @@
 package kaio.test.crud.demand;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import kaio.test.crud.product.Product;
 import kaio.test.crud.shared.BaseEntity;
 import lombok.Getter;
@@ -25,7 +26,7 @@ public class Demand extends BaseEntity {
     private Long client_id;
     private Date date;
     private String description;
-    @ManyToMany( cascade = CascadeType.ALL ) @Fetch(FetchMode.JOIN)
+    @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER) @Fetch(FetchMode.JOIN)
     @JoinTable(
             name = "demand_product",
             joinColumns = @JoinColumn(
@@ -37,6 +38,7 @@ public class Demand extends BaseEntity {
                     referencedColumnName = "id"
             )
     )
+    @JsonManagedReference
     public List<Product> products;
     public double getTotal(){
         double total = 0;
