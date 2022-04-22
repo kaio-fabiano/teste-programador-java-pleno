@@ -5,12 +5,14 @@ import { Client } from './models/client.model';
 import axios from 'axios';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
+import { Demand } from '../demand/model/demand.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientService {
   private path: string = '/clients/';
+  private pathForDemands: string = '/demands/';
   private apiUrl: string = environment.urlToApi;
 
   public async listClients() {
@@ -20,7 +22,21 @@ export class ClientService {
 
   public async listPageClients(page: number, limit: number) {
     const { data } = await axios.get<Client[]>(
-      this.apiUrl + this.path + '?page=' + (page) + '&limit=' + limit
+      this.apiUrl + this.path + '?page=' + page + '&limit=' + limit
+    );
+    return data;
+  }
+
+  public async listClientDemands(id: number, page: number, limit: number) {
+    const { data } = await axios.get<Demand[]>(
+      this.apiUrl +
+        this.path +
+        id +
+        this.pathForDemands +
+        '?page=' +
+        page +
+        '&limit=' +
+        limit
     );
     return data;
   }

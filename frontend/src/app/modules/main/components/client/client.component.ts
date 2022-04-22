@@ -70,7 +70,7 @@ export class ClientComponent implements OnInit {
   }
 
   public clientDemands(id: number) {
-    this.router.navigateByUrl('demands/' + id);
+    this.router.navigateByUrl('clients/demands/' + id);
   }
 
   public createDemand(client_id: number) {
