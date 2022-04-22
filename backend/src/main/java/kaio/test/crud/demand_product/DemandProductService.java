@@ -30,7 +30,7 @@ public class DemandProductService {
         if (demand == null) {
             throw new NotFoundException();
         }
-        return Product.find("SELECT p FROM Product p INNER JOIN p.demands pd WHERE pd.id = ?1", demand.getId()).page(page, limit).list();
+        return Product.find("SELECT p FROM Product p INNER JOIN p.demands pd WHERE pd.id = ?1", demand.getId()).page(page -1, limit).list();
     }
 
     public List<Product> createDemandProducts(Long id, DemandProductDto demandProductDto){
