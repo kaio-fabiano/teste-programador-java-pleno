@@ -74,7 +74,7 @@ export class DemandComponent implements OnInit {
         confirmButtonText: 'Sim, deletar!',
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const newClient = await this.demandService.deleteDemand(id);
+          await this.demandService.deleteDemand(id);
           this.demands?.splice(
             this.demands.findIndex((demand) => demand.id === id),
             1
