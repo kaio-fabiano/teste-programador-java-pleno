@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ClientDemandsComponent } from './modules/main/components/client/client-demands/client-demands.component';
 import { ClientComponent } from './modules/main/components/client/client.component';
 import { CreateClientComponent } from './modules/main/components/client/create-client/create-client.component';
 import { UpdateClientComponent } from './modules/main/components/client/update-client/update-client.component';
+import { DemandProductsComponent } from './modules/main/components/demand-products/demand-products.component';
 import { CreateDemandComponent } from './modules/main/components/demand/create-demand/create-demand.component';
-import { DemandProductsComponent } from './modules/main/components/demand/demand-products/demand-products.component';
 import { DemandComponent } from './modules/main/components/demand/demand.component';
+import { UpdateDemandComponent } from './modules/main/components/demand/update-demand/update-demand.component';
 import { CreateProductComponent } from './modules/main/components/product/create-product/create-product.component';
 import { ProductComponent } from './modules/main/components/product/product.component';
 import { UpdateProductComponent } from './modules/main/components/product/update-product/update-product.component';
@@ -29,6 +31,10 @@ const routes: Routes = [
     component: UpdateClientComponent,
   },
   {
+    path: 'clients/demands/:id',
+    component: ClientDemandsComponent,
+  },
+  {
     path: 'products',
     component: ProductComponent,
   },
@@ -49,13 +55,17 @@ const routes: Routes = [
     component: DemandComponent,
   },
   {
+    path: 'demands/update/:id',
+    component: UpdateDemandComponent,
+  },
+  {
     path: 'demands/create/:id',
     component: CreateDemandComponent,
   },
   {
-    path: 'demands/products/:id',
+    path: "demands/products/:id",
     component: DemandProductsComponent,
-  },
+  }
 ];
 
 @NgModule({
