@@ -80,7 +80,6 @@ public class DemandService {
 
     public Exception clientExists(Long id) {
         Client client = Client.findById(id);
-        System.out.println(client);
         if (client == null) {
             throw new WebApplicationException("Client Not Found", 404);
         }

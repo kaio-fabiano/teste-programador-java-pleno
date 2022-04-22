@@ -40,7 +40,6 @@ public class DemandProductResource {
             if (error.getResponse().getStatus() == 404){
                 return responseMessage.responseMessage(404,error.getMessage());
             }
-            System.out.println(error);
             throw error;
         }
         catch (Exception error) {
