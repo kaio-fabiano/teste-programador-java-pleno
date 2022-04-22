@@ -32,10 +32,13 @@ public class ClientResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Client> index(@QueryParam("limit") int limit,@QueryParam("page")  int page){
+        if (page == 0) {
+            page = 1;
+        }
         if (limit == 0) {
             limit = 10;
         }
-        return clientService.listClients(page, limit - 1);
+        return clientService.listClients(page - 1, limit);
     }
 
     @Transactional

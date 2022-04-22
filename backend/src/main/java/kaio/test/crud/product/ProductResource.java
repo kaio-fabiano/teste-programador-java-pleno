@@ -25,10 +25,13 @@ public class ProductResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> index(@QueryParam("limit") int limit,@QueryParam("page")  int page){
+        if (page == 0) {
+            page = 1;
+        }
         if (limit == 0){
             return productService.listAllProducts();
         }
-        return productService.listProducts(limit, page);
+        return productService.listProducts(limit, page - 1);
     }
 
     @POST
